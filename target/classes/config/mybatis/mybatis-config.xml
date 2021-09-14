@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 타입 별칭 설정============================  -->
+	<typeAliases>
+		<typeAlias type="com.user.domain.UserVO" alias="User"/>
+	</typeAliases>
+
+	<!-- 매퍼 정의================================ -->
+	<mappers>
+		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
+	</mappers>
+</configuration>
