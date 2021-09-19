@@ -34,14 +34,14 @@
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <c:if test="${loginUser.userid ne 'admin'}">
 	                    <c:if test="${loginUser eq null}">
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/login.me">로그인</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/join.me">회원가입</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/login">로그인</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/join">회원가입</a></li>
 						</c:if>
 						<c:if test="${loginUser ne null}">
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/yaksok.me">약속관리</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/yaksok">약속관리</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/myInfo.me">내정보</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/logout.me">로그아웃</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/myInfo">내정보</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/logout">로그아웃</a></li>
 						</c:if>      
 					</c:if>  
 					

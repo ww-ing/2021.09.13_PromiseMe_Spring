@@ -6,25 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.user.mapper.UserMapper">
 
 	<!-- 회원 등록 -->
-	<insert id="insertUser" parameterType="member.model.UserVO">
-		insert into member(idx, username, userid, pwd, hp1, hp2, hp3, indate, mstate)
+	<!-- <insert id="insertUser" parameterType="User">
+		insert into member
 		values (member_seq.nextval, #{username}, #{userid}, #{pwd}, #{hp1}, #{hp2}, #{hp3}, sysdate, 0)
-	</insert>
+	</insert> -->
 	
 	<!-- 아이디로 회원 정보 검색 -->
-	<select id="selectUserById" resultType="member.model.UserVO" parameterType="string">
+	<select id="selectUserById" resultType="User" parameterType="string">
 		select * from member where userid=#{userid}
 	</select>
 	
 	<!-- idx로 회원 정보 검색 -->
-	<select id="selectUser" resultType="member.model.UserVO" parameterType="string">
+	<!-- <select id="selectUser" resultType="User" parameterType="string">
 		select * from member where idx=#{idx}
-	</select>
+	</select> -->
 	
 	<!-- 회원 정보 수정 -->
-	<update id="updateMyInfo" parameterType="member.model.UserVO">
+	<!-- <update id="updateMyInfo" parameterType="User">
 		update member set username=#{username}, pwd=#{pwd}, hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3},
 			mstate=#{mstate} where idx=#{idx}
-	</update>
+	</update> -->
 	
 </mapper>

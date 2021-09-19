@@ -8,13 +8,19 @@ public class IndexController {
 	
 	
 	@RequestMapping("/start")
-	public String showStart() {
-		return "start";
+	public void showStart() {
 	}
 	
 	@RequestMapping("/main")
-	public String showMain() {
-		return "main";
+	public void showMain() {
+	}
+	
+	@RequestMapping("/top")
+	public void showTop() {
+	}
+			
+	@RequestMapping("/foot")
+	public void showFoot() {
 	}
 
 }
