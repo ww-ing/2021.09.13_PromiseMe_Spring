@@ -37,7 +37,6 @@ public class UserController {
 		}
 		
 		int	n = userService.insertUser(user);
-		System.out.println("n="+n);
 		
 		String msg=(n>0)?"회원가입 성공! 로그인 페이지로 이동합니다":"회원가입 실패! 회원가입 양식에 맞게 기입해주세요.";
 		String loc=(n>0)?"login":"javascript:history.back()";
@@ -51,10 +50,8 @@ public class UserController {
 	public String idCheck(Model m, HttpServletRequest req) {
 		
 		String userid=req.getParameter("userid");
-		System.out.println("userid="+userid);
 		
 		UserVO user=userService.selectUserById(userid);
-		System.out.println("user="+user);
 		
 		if(user!=null) {
 			return "";

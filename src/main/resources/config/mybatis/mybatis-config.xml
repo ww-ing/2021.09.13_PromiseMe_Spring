@@ -6,10 +6,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 타입 별칭 설정============================  -->
 	<typeAliases>
 		<typeAlias type="com.user.domain.UserVO" alias="User"/>
+		<typeAlias type="com.yaksok.domain.YaksokVO" alias="Yaksok"/>
+		<typeAlias type="com.yaksok.domain.YaksokInfoVO" alias="YaksokInfo"/>
+		<typeAlias type="com.yaksok.domain.YaksokOnOffVO" alias="YaksokOnOff"/>
+		<!-- <typeAlias type="com.yaksok.domain.YaksokCalendarVO" alias="YaksokCalendar"/> -->
+		
+		<!-- <typeAlias type="com.yaksok.domain.YaksokReserveVO" alias="YaksokReserve"/> -->
 	</typeAliases>
 
 	<!-- 매퍼 정의================================ -->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/YaksokMapper.xml"/>
 	</mappers>
 </configuration>

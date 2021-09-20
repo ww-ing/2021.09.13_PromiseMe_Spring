@@ -34,6 +34,6 @@
 	</bean>	
 	
 	<!-- MyBatis -->
-	<mybatis-spring:scan base-package="com.user.mapper"/>
+	<mybatis-spring:scan base-package="com.user.mapper, com.yaksok.mapper"/>
 			
 </beans>

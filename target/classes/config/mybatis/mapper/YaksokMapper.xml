@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yaksok.mapper.YaksokMapper">
+
+	<!-- idx로 모든 약속 부르기 -->
+	<select id="selectAllYaksok" resultType="Yaksok"
+	parameterType="string">
+		select 
+		*
+		from yaksok where idx=#{idx} 
+	</select>
+	
+	<!-- 약속 등록 -->	
+	<insert id="insertYaksok" parameterType="Yaksok">
+		insert into yaksok 
+		values(yaksok_yidx_seq.nextval, #{yaksokname}, sysdate, #{idx})
+	</insert>
+	
+	<!-- 약속 데이터 등록 -->
+	<insert id="insertYaksokInfo" parameterType="YaksokInfo">
+		insert into yaksok_info
+		values(yaksok_info_yidx_seq.nextval, #{yaksokurl}, #{locate}, 
+		#{number1_1}, #{number1_2}, #{number1_3}, 
+		#{number2_1}, #{number2_2}, #{number2_3}, 
+		#{image1}, #{image2}, #{image3}, #{image4}, #{image5}, 
+		#{content_main_title}, #{content_main}, 
+		#{content1_title}, #{content1},
+		#{content2_title}, #{content2}, 
+		#{content3_title}, #{content3}, 
+		#{templates})
+	</insert>
+	
+	<!-- 약속 OnOff 데이터 등록 -->
+	<insert id="insertYaksokOnOff" parameterType="YaksokOnOff">	
+		insert into yaksok_onoff
+		(yidx, yaksokonoff, calendaronoff, overlaponoff, payonoff, maxreserve)
+		values(yaksok_onoff_yidx_seq.nextval, #{yaksokonoff}, #{calendaronoff}, 
+		#{overlaponoff}, #{payonoff}, #{maxreserve})
+	</insert>
+	
+</mapper>
