@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yaksok.mapper.YaksokThemeMapper">
+
+	<!-- yidx 값으로 해당 약속 정보 부르기 -->
+	<select id="selectYaksokInfo" resultType="YaksokInfo"
+	parameterType="string">
+		select * from yaksok_info where yidx=#{yidx}
+	</select>
+	
+	<!-- 약속 정보 수정 -->
+	<update id="updateYaksokInfo" parameterType="YaksokInfo">
+		update yaksok_info set yaksokurl=#{yaksokurl}, locate=#{locate}, 
+		number1_1=#{number1_1}, number1_2=#{number1_2}, number1_3=#{number1_3},
+		number2_1=#{number2_1}, number2_2=#{number2_2}, number2_3=#{number2_3},
+		image1=#{image1}, image2=#{image2}, image3=#{image3}, image4=#{image4}, image5=#{image5},
+		content_main_title=#{content_main_title}, content_main=#{content_main},
+		content1_title=#{content1_title}, content1=#{content1},
+		content2_title=#{content2_title}, content2=#{content2},
+		content3_title=#{content3_title}, content3=#{content3},
+		templates=#{templates} where yidx=#{yidx}
+	</update>
+	
+</mapper>

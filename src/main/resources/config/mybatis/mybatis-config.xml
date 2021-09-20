@@ -18,5 +18,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/YaksokThemeMapper.xml"/>
 	</mappers>
 </configuration>

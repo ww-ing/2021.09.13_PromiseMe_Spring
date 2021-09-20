@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.common.CommonUtil;
 import com.common.RandomNumber;
@@ -24,8 +25,6 @@ public class YaksokController {
 	
 	@Inject
 	private YaksokService yaksokService;
-	
-	
 	
 	@GetMapping("/user/yaksok")
 	public String yaksok(Model m, HttpSession session) {
@@ -73,5 +72,64 @@ public class YaksokController {
 		return CommonUtil.addMsgLoc(m, msg, loc);
 		
 	}
-
+	
+	@PostMapping("/user/yaksokMenu")
+	public String yaksokMenu(Model m, @RequestParam("yidx") String yidx) {
+		
+		YaksokInfoVO info=yaksokService.selectYaksokInfo(yidx);
+		
+		m.addAttribute("info", info);
+		
+		return"yaksok/yaksokMenu";
+	}
+	
+	@GetMapping("/user/yaksokSetForm")
+	public String yaksokSetForm(Model m, @RequestParam("yidx") String yidx) {
+		
+		YaksokInfoVO info=yaksokService.selectYaksokInfo(yidx);
+		
+		m.addAttribute("info", info);
+		
+		return "yaksok/yaksokSetForm";
+	}
+	
+	@GetMapping("/user/yaksokSet")
+	public String yaksokSet(Model m, 
+			@RequestParam("editNum") String editNum,
+			@RequestParam("yidx") String yidx,
+			@RequestParam("templates") String templates) {
+		
+		String edit="";
+		if(editNum.equals("0")) {
+			m.addAttribute("edit", edit);
+		}
+		else if(editNum.equals("1")) {
+			edit="edit";
+			m.addAttribute("edit", edit);
+		}
+				
+		YaksokInfoVO info=yaksokService.selectYaksokInfo(yidx);
+		m.addAttribute("info", info);
+		
+		//선택한 탬플릿 번호
+		return "yaksok/templates/template"+templates+"/template"+templates;
+		
+	}
+	
+	@PostMapping("/user/yaksokEdit")
+	public String yaksokEdit(Model m, @ModelAttribute("info") YaksokInfoVO info) {
+		
+		//해당 약속의 정보 얻어오기
+	
+		int n=yaksokService.updateYaksokInfo(info);
+		
+		if(n>0) {
+			m.addAttribute("yidx", info.getYidx());
+			return "/yaksok/yaksokMenu";
+		}else {
+			return CommonUtil.addMsgBack(m, "수정 실패! 관리자에게 문의하세요.");
+		}
+		
+	}
 }
+

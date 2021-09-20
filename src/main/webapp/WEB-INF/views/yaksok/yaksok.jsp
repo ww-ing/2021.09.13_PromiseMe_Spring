@@ -29,7 +29,7 @@
 		   <th class="text text-danger">0</th>
 		   
 		   <td>   
-		    <form class="form-inline" action="yaksokMenu.me" method="post">
+		    <form class="form-inline" action="yaksokMenu" method="post">
 		   		<input type="hidden" name="yidx" value="${yaksok.yidx}">
 				<button>관리</button>
 			</form>
