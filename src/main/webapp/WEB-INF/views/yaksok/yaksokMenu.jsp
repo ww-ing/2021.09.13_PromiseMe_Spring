@@ -63,7 +63,7 @@
     					$('#yaksokMenu').html(res);
     				})
     				.fail(function(err){
-    					alert('수정실패'+' error: '+err.status);
+    					alert('error: '+err.status);
     				})
     			}
     			
@@ -259,7 +259,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item dropdown">
-                                    내 약속링크 : <a href="yaksokReservePage.me?url=${info.yaksokurl}" target="_blank">localhost:9090/PromiseMe/yaksokReservePage.me?url=${info.yaksokurl}</a>
+                                    내 약속링크 : <a href="yaksokReservePage?url=${info.yaksokurl}" target="_blank">localhost:9090/PromiseMe/yaksokReservePage?url=${info.yaksokurl}</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#!">내 정보</a>
                                         <a class="dropdown-item" href="#!">내 약속</a>

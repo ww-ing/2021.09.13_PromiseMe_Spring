@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yaksok.domain.YaksokInfoVO;
 import com.yaksok.domain.YaksokOnOffVO;
+import com.yaksok.domain.YaksokReserveVO;
 import com.yaksok.domain.YaksokVO;
 
 public interface YaksokService {
@@ -24,10 +25,22 @@ public interface YaksokService {
 	
 	
 	//--------------------YaksokThemeMapper 관련
+	
 	/**yidx로 약속 정보 선택*/
 	YaksokInfoVO selectYaksokInfo(String yidx); 
 	
 	/**약속 정보 수정*/
 	int updateYaksokInfo(YaksokInfoVO yaksokInfo);
-
+	
+	//--------------------YaksokCalendarMapper 관련
+	
+	
+	//--------------------YaksokReserveListMapper 관련
+	
+	/**약속 예약 정보 개수*/
+	int getYaksokReserveCount(String yidx);
+	
+	/**약속 예약 유저 정보 리스트 페이징*/
+	List<YaksokReserveVO> selectAllYaksokReserve(String yidx, int start, int end);
+	
 }

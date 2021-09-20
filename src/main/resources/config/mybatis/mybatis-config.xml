@@ -9,9 +9,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.yaksok.domain.YaksokVO" alias="Yaksok"/>
 		<typeAlias type="com.yaksok.domain.YaksokInfoVO" alias="YaksokInfo"/>
 		<typeAlias type="com.yaksok.domain.YaksokOnOffVO" alias="YaksokOnOff"/>
+		
+		<typeAlias type="com.yaksok.domain.YaksokReserveVO" alias="YaksokReserve"/>
 		<!-- <typeAlias type="com.yaksok.domain.YaksokCalendarVO" alias="YaksokCalendar"/> -->
 		
-		<!-- <typeAlias type="com.yaksok.domain.YaksokReserveVO" alias="YaksokReserve"/> -->
+		
 	</typeAliases>
 
 	<!-- 매퍼 정의================================ -->
@@ -19,5 +21,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokThemeMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/YaksokReserveListMapper.xml"/>
 	</mappers>
 </configuration>

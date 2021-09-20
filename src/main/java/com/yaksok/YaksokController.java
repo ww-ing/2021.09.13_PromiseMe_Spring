@@ -17,6 +17,7 @@ import com.common.RandomNumber;
 import com.user.domain.UserVO;
 import com.yaksok.domain.YaksokInfoVO;
 import com.yaksok.domain.YaksokOnOffVO;
+import com.yaksok.domain.YaksokReserveVO;
 import com.yaksok.domain.YaksokVO;
 import com.yaksok.service.YaksokService;
 
@@ -25,6 +26,8 @@ public class YaksokController {
 	
 	@Inject
 	private YaksokService yaksokService;
+	
+	//--------------------Yaksok 관련
 	
 	@GetMapping("/user/yaksok")
 	public String yaksok(Model m, HttpSession session) {
@@ -72,6 +75,8 @@ public class YaksokController {
 		return CommonUtil.addMsgLoc(m, msg, loc);
 		
 	}
+	
+	//--------------------YaksokTheme 관련
 	
 	@PostMapping("/user/yaksokMenu")
 	public String yaksokMenu(Model m, @RequestParam("yidx") String yidx) {
@@ -131,5 +136,65 @@ public class YaksokController {
 		}
 		
 	}
+	//--------------------YaksokCalendar 관련
+	
+	
+	//--------------------YaksokReserveList 관련
+	@GetMapping("/user/yaksokReserveList")
+	public String yaksokReserveList(Model m, 
+			@RequestParam("yidx") String yidx,
+			@RequestParam("cpage") String cpageStr) {
+		
+		System.out.println("yidx="+yidx);
+		System.out.println("cpage="+cpageStr);
+		//System.out.println("pageSize="+pageSizeStr);
+		
+		m.addAttribute("yidx", yidx);
+		
+		//default 페이지 창을 1로 지정
+		if(cpageStr==null||cpageStr.trim().isEmpty()) {
+			cpageStr="1";
+		}
+		
+		int cpage=Integer.parseInt(cpageStr.trim());
+		if(cpage<1) {
+			cpage=1;
+		}
+		
+		//페이지 사이즈를 유동적으로 받기 위함
+		//if(pageSizeStr==null||pageSizeStr.trim().isEmpty()) {
+			//pageSizeStr="5";
+		//}
+		String pageSizeStr="5";
+		
+		//약속 예약 정보 개수 가져오기
+		int count=yaksokService.getYaksokReserveCount(yidx);
+		m.addAttribute("reserveCount", count);
+		
+		//한 페이지 당 보여줄 게시글 수
+		int pageSize=Integer.parseInt(pageSizeStr);
+		
+		int pageCount=(count-1)/pageSize+1;
+		m.addAttribute("pageCount", pageCount);
+		
+		if(cpage>pageCount) {
+			cpage=pageCount;
+		}
+		
+		int end=cpage*pageSize;
+		int start=end-(pageSize-1);
+		
+		//약속 예약 정보 리스트
+		List<YaksokReserveVO> reserveList=yaksokService.selectAllYaksokReserve(yidx, start, end);		
+		m.addAttribute("reserveList", reserveList);
+		
+		return "/yaksok/yaksokReserveList";
+	}
+	
+//	@GetMapping("/user/yaksokReserveListUserInfoModal")
+//	public String yaksokReserveListUserInfoModal(Model m) {
+//		
+//		return "";
+//	}
 }
 
