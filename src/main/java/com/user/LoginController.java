@@ -46,10 +46,8 @@ public class LoginController {
 	public String login(Model m, @ModelAttribute("user") UserVO user, 
 			HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		
-		System.out.println("user="+user);
-		
-		String id = req.getParameter("userid");
-		String pwd = req.getParameter("pwd");
+		String id = user.getUserid();
+		String pwd = user.getPwd();
 		
 		//아이디 저장 체크박스에 체크한 값 받아오기
 		String saveId = req.getParameter("saveId");
@@ -100,7 +98,8 @@ public class LoginController {
 	
 	@GetMapping("/logout")
 	public String logout(Model m, 
-			HttpSession session, HttpServletRequest req) {
+			HttpSession session) {
+		
 		session.invalidate();
 		
 		return CommonUtil.addMsgLoc(m, "로그아웃 완료", "main");

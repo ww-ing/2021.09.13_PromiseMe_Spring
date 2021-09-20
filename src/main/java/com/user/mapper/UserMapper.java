@@ -10,9 +10,6 @@ public interface UserMapper {
 	/**아이디로 회원 정보 검색*/
 	UserVO selectUserById(String userid);
 	
-	/**idx로 회원 정보 검색*/
-	UserVO selectUser(String idx);
-	
 	/**회원 정보 수정*/
 	int updateMyInfo(UserVO user);
 

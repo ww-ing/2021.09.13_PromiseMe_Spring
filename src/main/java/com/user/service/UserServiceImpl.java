@@ -15,7 +15,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertUser(UserVO user) {
-		return 0;
+		
+		return userMapper.insertUser(user);
 	}
 
 	@Override
@@ -24,13 +25,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO selectUser(String idx) {
-		return null;
-	}
-
-	@Override
 	public int updateMyInfo(UserVO user) {
-		return 0;
+		
+		return userMapper.updateMyInfo(user);
+
 	}
+	
 
 }

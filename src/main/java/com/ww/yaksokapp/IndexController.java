@@ -22,5 +22,9 @@ public class IndexController {
 	@RequestMapping("/foot")
 	public void showFoot() {
 	}
+	
+	@RequestMapping("/msg")
+	public void showMsg() {
+	}
 
 }

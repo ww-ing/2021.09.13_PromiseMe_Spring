@@ -38,17 +38,17 @@
 	                        <li class="nav-item"><a class="nav-link" href="${myctx}/join">회원가입</a></li>
 						</c:if>
 						<c:if test="${loginUser ne null}">
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/yaksok">약속관리</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/user/yaksok">약속관리</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="#">고객센터</a></li>
-	                        <li class="nav-item"><a class="nav-link" href="${myctx}/myInfo">내정보</a></li>
+	                        <li class="nav-item"><a class="nav-link" href="${myctx}/user/myInfo">내정보</a></li>
 	                        <li class="nav-item"><a class="nav-link" href="${myctx}/logout">로그아웃</a></li>
 						</c:if>      
 					</c:if>  
 					
 					<c:if test="${loginUser.userid eq 'admin'}">
-						<li class="nav-item"><a class="nav-link" href="${myctx}/list.me">회원관리</a></li>
+						<li class="nav-item"><a class="nav-link" href="${myctx}/list">회원관리</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">약속관리</a></li>
-						<li class="nav-item"><a class="nav-link" href="${myctx}/logout.me">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href="${myctx}/logout">로그아웃</a></li>
 					</c:if>
                     </ul>
                 </div>
