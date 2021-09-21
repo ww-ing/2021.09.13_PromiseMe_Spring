@@ -1,6 +1,7 @@
 package com.yaksok;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -144,7 +145,8 @@ public class YaksokController {
 	@GetMapping("/user/yaksokReserveList")
 	public String yaksokReserveList(Model m, 
 			@RequestParam("yidx") String yidx,
-			@RequestParam("cpage") String cpageStr) {
+			@RequestParam("cpage") String cpageStr,
+			@RequestParam(defaultValue="5") String pageSizeStr) {
 		
 		m.addAttribute("yidx", yidx);
 		
@@ -162,7 +164,6 @@ public class YaksokController {
 		//if(pageSizeStr==null||pageSizeStr.trim().isEmpty()) {
 			//pageSizeStr="5";
 		//}
-		String pageSizeStr="5";
 		
 		//약속 예약 정보 개수 가져오기
 		int count=yaksokService.getYaksokReserveCount(yidx);
@@ -216,14 +217,111 @@ public class YaksokController {
 	
 	//--------------------YaksokStatistic 관련
 	
+	@GetMapping("/user/yaksokStatistics")
+	public String yaksokStatistics(Model m,
+			@RequestParam("yidx") String yidx,
+			@RequestParam(defaultValue="") String month_selectYear,
+			@RequestParam(defaultValue="") String month_selectMonth,
+			@RequestParam(defaultValue="") String year_selectYear
+			) {
+		
+		//String yidx=req.getParameter("yidx");
+		m.addAttribute("yidx", yidx);
+		//System.out.println("yidx="+yidx);
+		
+		//----------해당 월의 예약 통계 화면
+		//1. 데이터가 들어있는 연도 뽑아주기
+		List<String> yearList = yaksokService.getAllYaksokReserveYearList(yidx);
+		m.addAttribute("yearList", yearList);
+		
+		//2. 월 데이터의 선택된 year값 받아오기
+		//String month_selectYear=req.getParameter("month_selectYear");
+		//System.out.println("month_selectYear1="+month_selectYear);
+	
+		if(month_selectYear==null||month_selectYear.trim().isEmpty()) {
+			month_selectYear=yearList.get(0);
+			//System.out.println("month_selectYear2="+month_selectYear);
+			
+		}
+		m.addAttribute("month_selectYear", month_selectYear);
+		
+		//3. 데이터가 들어있는 월 뽑아주기
+		List<String> monthList = yaksokService.getAllYaksokReserveMonthList(yidx,month_selectYear);
+		//System.out.println("monthList="+monthList);
+		m.addAttribute("monthList", monthList);
+		
+		//4. 월 데이터의 선택된 month값 받아오기
+		//String month_selectMonth=req.getParameter("month_selectMonth");
+		//System.out.println("month_selectMonth1="+month_selectMonth);
+		
+		if(month_selectMonth==null||month_selectMonth.trim().isEmpty()) {
+			month_selectMonth=monthList.get(0);
+			//System.out.println("month_selectMonth2="+month_selectMonth);
+			
+		}
+		m.addAttribute("month_selectMonth", month_selectMonth);
+		
+		//----------해당 연도의 예약 통계 화면
+		//1. 선택한 연도 받아오기
+		//String year_selectYear=req.getParameter("year_selectYear");
+		//System.out.println("year_selectYear1="+year_selectYear);
+		
+		if(year_selectYear==null||year_selectYear.trim().isEmpty()) {
+			year_selectYear=yearList.get(0);
+			//System.out.println("year_selectYear2="+year_selectYear);
+			
+		}
+		
+		m.addAttribute("year_selectYear", year_selectYear);
+
+		//----------해당 월의의 예약 통계 데이터
+		
+		//10월이 아니라면 0을 빼기
+		if(!month_selectMonth.equals("10")) {
+			month_selectMonth=month_selectMonth.replace("0", "");
+			
+			//System.out.println("0을 제거한 month_selectMonth="+month_selectMonth);
+		}
+		//선택한 연 월 을 합친 문자열
+		String year_month_data=month_selectYear+"/"+month_selectMonth+"/";
+		
+		//선택한 월의 마지막 day값 구하기
+        Calendar cal = Calendar.getInstance();
+        cal.set(Integer.parseInt(month_selectYear), Integer.parseInt(month_selectMonth)-1, 1);
+		String month_last_day=Integer.toString(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+		
+		//해당 월의 데이터 가져오기
+//		List<String> monthData = 
+//				dao.selectYaksokReserveMonthData(yidx,year_month_data,month_last_day);
+		
+//		System.out.println("해당 월의 데이터="+monthData);
+		
+		//----------해당 연도의 예약 통계 데이터
+		//List<String> yearData = dao.selectYaksokReserveYearData(yidx,year_selectYear);
+		
+		
+		//----------중복 예약 통계 데이터
+		//약속 예약 유저정보 중 중복값이 없는 (1회만 예약한 유저의 수)
+		int notOverlapCount=yaksokService.selectYaksokReserveNotOverlapCount(yidx);
+		
+		//약속 예약 유저정보 중 중복값을 제거한 유저 수
+		int reserveUserCount=yaksokService.selectYaksokReserveUserCount(yidx);
+		
+		//약속 예약 유저정보 중 중복값이 있는 (2회 이상 예약한 유저의 수)
+		int overlapCount=reserveUserCount-notOverlapCount;
+		
+		m.addAttribute("notOverlapCount", notOverlapCount);
+		m.addAttribute("overlapCount", overlapCount);
+		
+		return "/yaksok/yaksokStatistics";
+	}
+	
 	
 	//--------------------YaksokSetting 관련
 	
 	@GetMapping("/user/yaksokSetting")
 	public String yaksokSetting(Model m,
 			@RequestParam("yidx") String yidx) {
-		
-		System.out.println(yidx);
 		
 		YaksokOnOffVO onoffData=yaksokService.selectYaksokOnOff(yidx);
 		
@@ -302,7 +400,6 @@ public class YaksokController {
 		m.addAttribute("yidx", onoffData.getYidx());
 		
 		return "redirect:yaksokSetting";
-		//return "/yaksok/yaksokSetting";
 		
 	}
 }

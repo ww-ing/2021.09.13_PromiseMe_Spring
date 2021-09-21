@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yaksok.mapper.YaksokStatisticsMapper">
+
+	<!-- yidx로 약속 예약 정보의 예약된 year리스트 모두 가져오기 -->
+	<select id="getAllYaksokReserveYearList" resultType="string"
+	parameterType="string">
+		select distinct (to_char(rindate,'YY')) yearList
+		from yaksok_reserve where yidx=#{yidx} order by yearList desc
+	</select>
+
+	<!-- yidx와 year갚으로 약속 예약 정보의 해당 year에 예약된 month리스트 모두 가져오기 -->
+	<select id="getAllYaksokReserveMonthList" resultType="string"
+	parameterType="hashmap">
+		select distinct (to_char(rindate,'MM')) monthDate
+		from yaksok_reserve 
+		where yidx=#{yidx} and to_char(rindate,'YY') = #{year}
+		order by monthDate desc
+	</select>
+	
+	<!-- 약속 예약 정보의 중복되지 않는(1회만 예약한) 유저의 수 -->
+	<select id="selectYaksokReserveNotOverlapCount" resultType="int"
+	parameterType="string">
+		select count(*) from(
+		select rhp, count(*) 
+		from yaksok_reserve where yidx=#{yidx}
+		group by rhp having count(*) = 1)
+	</select>
+	
+	<!-- yidx로 약속 예약 정보의 중복을 제거한 유저 수 -->
+	<select id="selectYaksokReserveUserCount" resultType="int"
+	parameterType="string">
+		select count(*) 
+		from(
+		select distinct rhp 
+		from yaksok_reserve 
+		where yidx=#{yidx})
+	</select>
+	
+</mapper>

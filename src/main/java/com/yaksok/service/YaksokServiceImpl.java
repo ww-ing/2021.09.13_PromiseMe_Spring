@@ -15,6 +15,7 @@ import com.yaksok.domain.YaksokVO;
 import com.yaksok.mapper.YaksokMapper;
 import com.yaksok.mapper.YaksokReserveListMapper;
 import com.yaksok.mapper.YaksokSettingMapper;
+import com.yaksok.mapper.YaksokStatisticsMapper;
 import com.yaksok.mapper.YaksokThemeMapper;
 
 @Service("yaksokService")
@@ -28,6 +29,9 @@ public class YaksokServiceImpl implements YaksokService {
 	
 	@Inject
 	private YaksokReserveListMapper yaksokReserveListMapper;
+	
+	@Inject
+	private YaksokStatisticsMapper yaksokStatisticsMapper;
 	
 	@Inject
 	private YaksokSettingMapper yaksokSettingMapper;
@@ -80,7 +84,6 @@ public class YaksokServiceImpl implements YaksokService {
 	
 	//--------------------YaksokCalendarMapper 관련
 	
-
 	
 	
 	
@@ -121,6 +124,41 @@ public class YaksokServiceImpl implements YaksokService {
 	
 	
 	
+	//--------------------YaksokStatisticsMapper 관련	
+	
+	/**약속 예약 정보의 year데이터*/
+	@Override
+	public List<String> getAllYaksokReserveYearList(String yidx) {
+		return yaksokStatisticsMapper.getAllYaksokReserveYearList(yidx);
+	}
+
+	/**약속 예약 정보의 month데이터*/
+	@Override
+	public List<String> getAllYaksokReserveMonthList(String yidx, String year) {
+
+		Map<String, String> map=new HashMap<>();
+		map.put("yidx", yidx);
+		map.put("year", year);
+		
+		return yaksokStatisticsMapper.getAllYaksokReserveMonthList(map);
+	}
+
+	/**약속 예약 정보의 1회만 예약을 한 예약의 수*/
+	@Override
+	public int selectYaksokReserveNotOverlapCount(String yidx) {
+		return yaksokStatisticsMapper.selectYaksokReserveNotOverlapCount(yidx);
+	}
+
+	/**약속 예약 정보의 중복을 제거한 총 유저 수*/
+	@Override
+	public int selectYaksokReserveUserCount(String yidx) {
+		return yaksokStatisticsMapper.selectYaksokReserveUserCount(yidx);
+	}
+	
+	
+	
+	
+	
 	//--------------------YaksokSettingMapper 관련
 
 	/**yidx로 약속 OnOff 정보 부르기*/
@@ -135,5 +173,4 @@ public class YaksokServiceImpl implements YaksokService {
 		return yaksokSettingMapper.updateYaksokOnOff(yaksokOnOff);
 	}
 	
-
 }

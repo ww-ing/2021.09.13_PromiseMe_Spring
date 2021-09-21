@@ -20,7 +20,7 @@
         <!--  통계 페이지 js -->
         <!-- Load d3.js and c3.js -->
         <script src="https://d3js.org/d3.v5.min.js"></script>
-        <script src="yaksok/js/c3.min.js"></script>
+        <script src="${myctx}/resources/static/yaksok/statistics/js/c3.min.js"></script>
         
         <script>
         		/* 페이지 시작 시 첫 페이지를 테마 페이지로 지정 */
