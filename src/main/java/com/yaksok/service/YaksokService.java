@@ -24,6 +24,9 @@ public interface YaksokService {
 	int insertYaksokOnOff(YaksokOnOffVO yaksokOnOff);
 	
 	
+	
+	
+	
 	//--------------------YaksokThemeMapper 관련
 	
 	/**yidx로 약속 정보 선택*/
@@ -32,7 +35,14 @@ public interface YaksokService {
 	/**약속 정보 수정*/
 	int updateYaksokInfo(YaksokInfoVO yaksokInfo);
 	
+	
+	
+	
+	
 	//--------------------YaksokCalendarMapper 관련
+	
+	
+	
 	
 	
 	//--------------------YaksokReserveListMapper 관련
@@ -42,5 +52,23 @@ public interface YaksokService {
 	
 	/**약속 예약 유저 정보 리스트 페이징*/
 	List<YaksokReserveVO> selectAllYaksokReserve(String yidx, int start, int end);
+	
+	/**약속 예약 유저 정보*/
+	YaksokReserveVO selectYaksokReserve(String ridx);
+	
+	/**약속 예약 유저의 unchecked 정보 수정*/
+	int updateYaksokReserve(String ridx);
+	
+	
+	
+	
+	
+	//--------------------YaksokSettingMapper 관련
+	
+	/**yidx로 약속 OnOff 정보 부르기*/
+	YaksokOnOffVO selectYaksokOnOff(String yidx);
+	
+	/**약속 OnOff 정보 수정*/
+	int updateYaksokOnOff(YaksokOnOffVO yaksokOnOff);
 	
 }

@@ -1,5 +1,6 @@
 package com.yaksok;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,7 +42,7 @@ public class YaksokController {
 		
 		m.addAttribute("yaksokList", yaksokList);
 		
-		return "yaksok/yaksok";
+		return "/yaksok/yaksok";
 	}
 	
 	@PostMapping("/user/yaksokAdd")
@@ -85,7 +86,7 @@ public class YaksokController {
 		
 		m.addAttribute("info", info);
 		
-		return"yaksok/yaksokMenu";
+		return"/yaksok/yaksokMenu";
 	}
 	
 	@GetMapping("/user/yaksokSetForm")
@@ -95,7 +96,7 @@ public class YaksokController {
 		
 		m.addAttribute("info", info);
 		
-		return "yaksok/yaksokSetForm";
+		return "/yaksok/yaksokSetForm";
 	}
 	
 	@GetMapping("/user/yaksokSet")
@@ -117,7 +118,7 @@ public class YaksokController {
 		m.addAttribute("info", info);
 		
 		//선택한 탬플릿 번호
-		return "yaksok/templates/template"+templates+"/template"+templates;
+		return "/yaksok/templates/template"+templates+"/template"+templates;
 		
 	}
 	
@@ -144,10 +145,6 @@ public class YaksokController {
 	public String yaksokReserveList(Model m, 
 			@RequestParam("yidx") String yidx,
 			@RequestParam("cpage") String cpageStr) {
-		
-		System.out.println("yidx="+yidx);
-		System.out.println("cpage="+cpageStr);
-		//System.out.println("pageSize="+pageSizeStr);
 		
 		m.addAttribute("yidx", yidx);
 		
@@ -191,10 +188,121 @@ public class YaksokController {
 		return "/yaksok/yaksokReserveList";
 	}
 	
-//	@GetMapping("/user/yaksokReserveListUserInfoModal")
-//	public String yaksokReserveListUserInfoModal(Model m) {
-//		
-//		return "";
-//	}
-}
+	@GetMapping("/user/yaksokReserveListUserInfoModal")
+	public String yaksokReserveListUserInfoModal(Model m,
+			@RequestParam("yidx") String yidx,
+			@RequestParam("ridx") String ridx) {
 
+		m.addAttribute("yidx", yidx);
+		m.addAttribute("ridx", ridx);
+		
+		YaksokReserveVO vo=yaksokService.selectYaksokReserve(ridx);
+		
+		String rusername=vo.getRusername();
+		String rhp=vo.getRhp();
+		Date rindate=vo.getRindate();
+		String rcontent=vo.getRcontent();
+		m.addAttribute("rusername", rusername);
+		m.addAttribute("rhp", rhp);
+		m.addAttribute("rindate", rindate);
+		m.addAttribute("rcontent", rcontent);
+		
+		if(vo.getRcheckedstate().equals("1")) {
+			yaksokService.updateYaksokReserve(ridx);
+		}
+		
+		return "/yaksok/modal/yaksokReserveListUserInfoModal";
+	}
+	
+	//--------------------YaksokStatistic 관련
+	
+	
+	//--------------------YaksokSetting 관련
+	
+	@GetMapping("/user/yaksokSetting")
+	public String yaksokSetting(Model m,
+			@RequestParam("yidx") String yidx) {
+		
+		System.out.println(yidx);
+		
+		YaksokOnOffVO onoffData=yaksokService.selectYaksokOnOff(yidx);
+		
+		m.addAttribute("onoffData", onoffData);
+		
+		String yaksokonoffCheck="";
+		if(onoffData.getYaksokonoff().equals("1")) {
+			yaksokonoffCheck="checked";
+		}
+		String calendaronoffCheck="";
+		if(onoffData.getCalendaronoff().equals("1")) {
+			calendaronoffCheck="checked";
+		}
+		String overlaponoffCheck="";
+		if(onoffData.getOverlaponoff().equals("1")) {
+			overlaponoffCheck="checked";
+		}
+		String payonoffCheck="";
+		if(onoffData.getPayonoff().equals("1")) {
+			payonoffCheck="checked";
+		}
+		String maxreserveonoffCheck="";
+		if(onoffData.getMaxreserve().equals("1")) {
+			maxreserveonoffCheck="checked";
+		}
+		
+		m.addAttribute("yaksokonoffCheck", yaksokonoffCheck);
+		m.addAttribute("calendaronoffCheck", calendaronoffCheck);
+		m.addAttribute("overlaponoffCheck", overlaponoffCheck);
+		m.addAttribute("payonoffCheck", payonoffCheck);
+		m.addAttribute("maxreserveonoffCheck", maxreserveonoffCheck);
+		
+		return "/yaksok/yaksokSetting";
+	}
+	
+	@GetMapping("/user/yaksokSettingUpdate")
+	public String YaksokSettingUpdate(Model m,
+			@ModelAttribute("onoffData") YaksokOnOffVO onoffData) {
+	
+		String yaksokOnOffStr=onoffData.getYaksokonoff();
+		String calendarOnOffStr=onoffData.getCalendaronoff();
+		String overlapOnOffStr=onoffData.getOverlaponoff();
+		String payOnOffStr=onoffData.getPayonoff();
+		String maxreserveStr=onoffData.getMaxreserve();
+		
+		String yaksokOnOff="0";
+		if(yaksokOnOffStr!=null) {
+			yaksokOnOff="1";
+		}
+		
+		String calendarOnOff="0";
+		if(calendarOnOffStr!=null) {
+			calendarOnOff="1";
+		}
+		
+		String overlapOnOff="0";
+		if(overlapOnOffStr!=null) {
+			overlapOnOff="1";
+		}
+		
+		String payOnOff="0";
+		if(payOnOffStr!=null) {
+			payOnOff="1";
+		}
+		
+		String maxreserveOnOff="0";
+		if(maxreserveStr!=null) {
+			maxreserveOnOff="1";
+		}
+		
+		YaksokOnOffVO onoffVo=new YaksokOnOffVO(onoffData.getYidx(),yaksokOnOff,calendarOnOff,
+				overlapOnOff,payOnOff,maxreserveOnOff);
+		
+		int n=yaksokService.updateYaksokOnOff(onoffVo);
+		
+		m.addAttribute("yidx", onoffData.getYidx());
+		
+		return "redirect:yaksokSetting";
+		//return "/yaksok/yaksokSetting";
+		
+	}
+}

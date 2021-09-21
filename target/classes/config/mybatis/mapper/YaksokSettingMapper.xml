@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yaksok.mapper.YaksokSettingMapper">
+
+	<!-- yidx로 약속 OnOff 데이터 부르기  -->
+	<select id="selectYaksokOnOff" resultType="YaksokOnOff"
+	parameterType="string">
+		select *
+		from yaksok_onoff where yidx=#{yidx}
+	</select>
+	
+	<!-- 약속 OnOff 데이터 수정 -->
+	<update id="updateYaksokOnOff" parameterType="YaksokOnOff">
+		update yaksok_onoff set yaksokonoff=#{yaksokonoff}, calendaronoff=#{calendaronoff}, 
+		overlaponoff=#{overlaponoff}, payonoff=#{payonoff}, maxreserve=#{maxreserve} 
+		where yidx=#{yidx}
+	</update>
+	
+</mapper>

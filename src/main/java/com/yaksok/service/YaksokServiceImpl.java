@@ -14,6 +14,7 @@ import com.yaksok.domain.YaksokReserveVO;
 import com.yaksok.domain.YaksokVO;
 import com.yaksok.mapper.YaksokMapper;
 import com.yaksok.mapper.YaksokReserveListMapper;
+import com.yaksok.mapper.YaksokSettingMapper;
 import com.yaksok.mapper.YaksokThemeMapper;
 
 @Service("yaksokService")
@@ -27,6 +28,9 @@ public class YaksokServiceImpl implements YaksokService {
 	
 	@Inject
 	private YaksokReserveListMapper yaksokReserveListMapper;
+	
+	@Inject
+	private YaksokSettingMapper yaksokSettingMapper;
 	
 	//----------YaksokMapper 관련
 
@@ -54,6 +58,9 @@ public class YaksokServiceImpl implements YaksokService {
 		return yaksokMapper.insertYaksokOnOff(yaksokOnOff);
 	}
 
+
+	
+	
 	
 	//----------YaksokThemeMapper 관련
 	
@@ -66,9 +73,18 @@ public class YaksokServiceImpl implements YaksokService {
 	public int updateYaksokInfo(YaksokInfoVO yaksokInfo) {
 		return yaksokThemeMapper.updateYaksokInfo(yaksokInfo);
 	}
+	
+	
+	
+	
+	
 	//--------------------YaksokCalendarMapper 관련
 	
 
+	
+	
+	
+	
 	//--------------------YaksokReserveListMapper 관련
 	
 	/**약속 예약 정보 개수*/
@@ -87,6 +103,36 @@ public class YaksokServiceImpl implements YaksokService {
 		map.put("end", String.valueOf(end));
 		
 		return yaksokReserveListMapper.selectAllYaksokReserve(map);
+	}
+
+	/**약속 예약 유저 정보*/
+	@Override
+	public YaksokReserveVO selectYaksokReserve(String ridx) {
+		return yaksokReserveListMapper.selectYaksokReserve(ridx);
+	}
+
+	/**약속 예약 유저의 unchecked 정보 수정*/
+	@Override
+	public int updateYaksokReserve(String ridx) {
+		return yaksokReserveListMapper.updateYaksokReserve(ridx);
+	}
+	
+	
+	
+	
+	
+	//--------------------YaksokSettingMapper 관련
+
+	/**yidx로 약속 OnOff 정보 부르기*/
+	@Override
+	public YaksokOnOffVO selectYaksokOnOff(String yidx) {
+		return yaksokSettingMapper.selectYaksokOnOff(yidx);
+	}
+
+	/**약속 OnOff 정보 수정*/
+	@Override
+	public int updateYaksokOnOff(YaksokOnOffVO yaksokOnOff) {
+		return yaksokSettingMapper.updateYaksokOnOff(yaksokOnOff);
 	}
 	
 

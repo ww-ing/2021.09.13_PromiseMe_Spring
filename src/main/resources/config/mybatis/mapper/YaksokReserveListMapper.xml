@@ -21,4 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		yn between #{start} and #{end}
 	</select>
 	
+	<!-- ridx로 약속 예약 유저 정보 가져오기 -->
+	<select id="selectYaksokReserve" resultType="YaksokReserve"
+	parameterType="string">
+		select * from yaksok_reserve where ridx=#{ridx}
+	</select>
+	
+	<!-- ridx로 약속 예약 유저 정보의 rcheckedstate를 비확인에서 확인으로 수정 -->
+	<update id="updateYaksokReserve" parameterType="string">
+		update yaksok_reserve set rcheckedstate = 0 where ridx=#{ridx}
+	</update>
+	
 </mapper>
