@@ -8,10 +8,12 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.yaksok.domain.YaksokCalendarVO;
 import com.yaksok.domain.YaksokInfoVO;
 import com.yaksok.domain.YaksokOnOffVO;
 import com.yaksok.domain.YaksokReserveVO;
 import com.yaksok.domain.YaksokVO;
+import com.yaksok.mapper.YaksokCalendarMapper;
 import com.yaksok.mapper.YaksokMapper;
 import com.yaksok.mapper.YaksokReserveListMapper;
 import com.yaksok.mapper.YaksokSettingMapper;
@@ -28,6 +30,9 @@ public class YaksokServiceImpl implements YaksokService {
 	private YaksokThemeMapper yaksokThemeMapper;
 	
 	@Inject
+	private YaksokCalendarMapper yaksokCalendarMapper;
+	
+	@Inject
 	private YaksokReserveListMapper yaksokReserveListMapper;
 	
 	@Inject
@@ -35,6 +40,10 @@ public class YaksokServiceImpl implements YaksokService {
 	
 	@Inject
 	private YaksokSettingMapper yaksokSettingMapper;
+	
+	
+	
+	
 	
 	//----------YaksokMapper 관련
 
@@ -83,6 +92,36 @@ public class YaksokServiceImpl implements YaksokService {
 	
 	
 	//--------------------YaksokCalendarMapper 관련
+	
+	/**약속 yidx로 캘린더 정보 불러오기*/
+	@Override
+	public List<YaksokCalendarVO> selectAllYaksokCalendar(String yidx) {
+		return yaksokCalendarMapper.selectAllYaksokCalendar(yidx);
+	}
+	
+	/**약속 캘린더 일정 등록*/
+	@Override
+	public int insertYaksokCalendar(YaksokCalendarVO yaksokCalendar) {
+		return yaksokCalendarMapper.insertYaksokCalendar(yaksokCalendar);
+	}
+	
+	/**약속 일정 cidx로 캘린더 일정 정보 불러오기*/
+	@Override
+	public YaksokCalendarVO selectYaksokCalendarSchedule(String cidx) {
+		return yaksokCalendarMapper.selectYaksokCalendarSchedule(cidx);
+	}
+	
+	/**약속 캘린더 일정 수정*/
+	@Override
+	public int updateYaksokCalendar(YaksokCalendarVO yaksokCalendar) {
+		return yaksokCalendarMapper.updateYaksokCalendar(yaksokCalendar);
+	}
+	
+	/**약속 캘린더 일정 삭제*/
+	@Override
+	public int deleteYaksokCalendar(String cidx) {
+		return yaksokCalendarMapper.deleteYaksokCalendar(cidx);
+	}
 	
 	
 	

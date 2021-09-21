@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yaksok.mapper.YaksokCalendarMapper">
+
+	<!-- 약속 캘린더 리스트 부르기 -->
+	<select id="selectAllYaksokCalendar" resultType="YaksokCalendar"
+	parameterType="string">
+		select * from yaksok_calendar where yidx=#{yidx}
+	</select>
+	
+	<!-- 약속 캘린더 일정 등록 -->
+	<insert id="insertYaksokCalendar" parameterType="YaksokCalendar">
+		insert into yaksok_calendar
+		values(yaksok_calendar_cidx_seq.nextval, #{ctitle}, #{ccontent}, #{cyear}, #{cmonth}, #{cday}, #{yidx})
+	</insert>
+	
+	<!-- 약속 캘린더 일정의 cidx로 스케줄 정보 부르기 -->
+	<select id="selectYaksokCalendarSchedule" resultType="YaksokCalendar"
+	parameterType="string">
+		select * from yaksok_calendar where cidx=#{cidx}
+	</select>
+	
+	<!-- 약속 캘린더 일정의 cidx로 스케줄 정보 수정 -->
+	<update id="updateYaksokCalendar" parameterType="YaksokCalendar">
+		update yaksok_calendar 
+		set ctitle=#{ctitle}, ccontent=#{ccontent} where cidx=#{cidx}
+	</update>
+	
+	<!-- 약속 캘린더 일정의 cidx로 스케줄 정보 삭제 -->
+	<delete id="deleteYaksokCalendar" parameterType="string">
+		delete from yaksok_calendar where cidx=#{cidx}
+	</delete>
+
+</mapper>

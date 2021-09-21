@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.common.CommonUtil;
 import com.common.RandomNumber;
 import com.user.domain.UserVO;
+import com.yaksok.domain.YaksokCalendarVO;
 import com.yaksok.domain.YaksokInfoVO;
 import com.yaksok.domain.YaksokOnOffVO;
 import com.yaksok.domain.YaksokReserveVO;
@@ -28,6 +30,10 @@ public class YaksokController {
 	
 	@Inject
 	private YaksokService yaksokService;
+	
+	
+	
+	
 	
 	//--------------------Yaksok 관련
 	
@@ -138,10 +144,99 @@ public class YaksokController {
 		}
 		
 	}
+	
+	
+	
+	
+	
 	//--------------------YaksokCalendar 관련
+	
+	@GetMapping("/user/yaksokCalendar")
+	public String yaksokCalendar(Model m,
+			@RequestParam("yidx") String yidx) {
+		
+		m.addAttribute("yidx", yidx);
+		
+		List<YaksokCalendarVO> calendarList=yaksokService.selectAllYaksokCalendar(yidx);
+		m.addAttribute("calendarList", calendarList);
+		
+		return "/yaksok/yaksokCalendar";
+	}
+	
+	@GetMapping("/user/yaksokCalendarAdd")
+	public String yaksokCalendarAdd(Model m,
+			@RequestParam("yidx") String yidx,
+			@RequestParam("ctitle") String ctitle,
+			@RequestParam("ccontent") String ccontent,
+			@RequestParam("year") String cyear,
+			@RequestParam("month") String cmonth,
+			@RequestParam("day") String cday) {
+		
+		YaksokCalendarVO vo=new YaksokCalendarVO(null,ctitle,ccontent,cyear,cmonth,cday,yidx);
+		
+		yaksokService.insertYaksokCalendar(vo);
+		
+		m.addAttribute("yidx", yidx);
+		return "redirect:yaksokCalendar";
+	}
+	
+	@GetMapping("/user/yaksokCalendarEditModal")
+	public String yaksokCalendarEditModal(Model m,
+			HttpServletRequest req,
+			@RequestParam("yidx") String yidx,
+			@RequestParam("cidx") String cidx) {
+		
+		YaksokCalendarVO vo=yaksokService.selectYaksokCalendarSchedule(cidx);
+		
+		String ctitle=vo.getCtitle();
+		String ccontent=vo.getCcontent();
+		
+		req.setAttribute("yidx", yidx);
+		req.setAttribute("cidx", cidx);
+		req.setAttribute("ctitle", ctitle);
+		req.setAttribute("ccontent", ccontent);
+		
+		return "/yaksok/modal/yaksokCalendarEditModal";
+	}
+	
+	@GetMapping("/user/yaksokCalendarEdit")
+	public String yaksokCalendarEdit(Model m,
+			HttpServletRequest req) {
+		
+		String yidx=req.getParameter("yidx");
+		String cidx=req.getParameter("cidx");
+		String ctitle=req.getParameter("ctitle");
+		String ccontent=req.getParameter("ccontent");
+		
+		YaksokCalendarVO vo=new YaksokCalendarVO(cidx,ctitle,ccontent,null,null,null,null);
+		
+		yaksokService.updateYaksokCalendar(vo);
+		
+		m.addAttribute("yidx", yidx);
+		
+		return "redirect:yaksokCalendar";
+		
+	}
+	
+	@GetMapping("/user/yaksokCalendarDelete")
+	public String yaksokCalendarDelete(Model m,
+			HttpServletRequest req,
+			@RequestParam("cidx") String cidx) {
+		
+		String yidx=req.getParameter("yidx");
+		m.addAttribute("yidx", yidx);
+		
+		yaksokService.deleteYaksokCalendar(cidx);
+		
+		return "redirect:yaksokCalendar";
+	}
+	
+	
+	
 	
 	
 	//--------------------YaksokReserveList 관련
+	
 	@GetMapping("/user/yaksokReserveList")
 	public String yaksokReserveList(Model m, 
 			@RequestParam("yidx") String yidx,
@@ -214,6 +309,10 @@ public class YaksokController {
 		
 		return "/yaksok/modal/yaksokReserveListUserInfoModal";
 	}
+	
+	
+	
+	
 	
 	//--------------------YaksokStatistic 관련
 	
@@ -317,6 +416,9 @@ public class YaksokController {
 	}
 	
 	
+	
+	
+	
 	//--------------------YaksokSetting 관련
 	
 	@GetMapping("/user/yaksokSetting")
@@ -395,7 +497,7 @@ public class YaksokController {
 		YaksokOnOffVO onoffVo=new YaksokOnOffVO(onoffData.getYidx(),yaksokOnOff,calendarOnOff,
 				overlapOnOff,payOnOff,maxreserveOnOff);
 		
-		int n=yaksokService.updateYaksokOnOff(onoffVo);
+		yaksokService.updateYaksokOnOff(onoffVo);
 		
 		m.addAttribute("yidx", onoffData.getYidx());
 		
