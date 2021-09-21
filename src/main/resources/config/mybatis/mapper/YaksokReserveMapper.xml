@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yaksok.mapper.YaksokReserveMapper">
+
+	<!-- 약속 url로 약속 정보 부르기 -->
+	<select id="selectYaksokInfoByURL" parameterType="string"
+	resultType="YaksokInfo">
+		select * from yaksok_info where yaksokurl=#{yaksokurl}
+	</select>
+	
+	<!-- yidx로 약속 OnOff 데이터 부르기  -->
+	<select id="selectYaksokOnOff" resultType="YaksokOnOff"
+	parameterType="string">
+		select *
+		from yaksok_onoff where yidx=#{yidx}
+	</select>
+	
+	<!-- 약속 예약 정보 등록 -->
+	<insert id="insertYaksokReserve" parameterType="YaksokReserve" >
+		insert into yaksok_reserve 
+		values(yaksok_reserve_ridx_seq.nextval, #{rusername}, #{rhp}, #{rcontent}, #{rnumber}, 
+		sysdate, #{rcheckedstate}, #{yidx})
+	</insert>
+	
+</mapper>
