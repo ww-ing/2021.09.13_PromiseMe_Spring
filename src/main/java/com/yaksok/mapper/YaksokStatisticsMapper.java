@@ -16,5 +16,8 @@ public interface YaksokStatisticsMapper {
 	
 	/**약속 예약 정보의 중복을 제거한 총 유저 수*/
 	int selectYaksokReserveUserCount(String yidx);
+	
+	/**약속 얘약 정보의 month 데이터*/
+	List<String> selectYaksokReserveMonthData(Map<String, String> map);
 
 }

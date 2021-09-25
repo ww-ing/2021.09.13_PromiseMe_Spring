@@ -23,7 +23,7 @@
                             
                             <div class="form-group">
                             	<label for="ccontent">설명</label>
-                            	<p><textarea name="ccontent" cols="55" rows="5"></textarea></p>
+                            	<p><textarea name="ccontent" cols="53" rows="5"></textarea></p>
                             </div>
     
                             <div class="form-group" align="center">

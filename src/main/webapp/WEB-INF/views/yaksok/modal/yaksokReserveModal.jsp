@@ -37,7 +37,7 @@
                             
                             <div class="form-group">
                             	<label for="hp">요청사항</label>
-                            	<p><textarea name="rcontent" cols="55" rows="5"></textarea></p>
+                            	<p><textarea name="rcontent" cols="53" rows="5"></textarea></p>
                             </div>
                             <div class="form-group" align="center">
                             	<button class="btn btn-primary btn-block">약속하기</button>

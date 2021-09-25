@@ -58,10 +58,10 @@ public class YaksokReserveController {
 		int n=yaksokReserveService.insertYaksokReserve(reserveVo);
 		
 		m.addAttribute("url", url);
-		//String msg=(n>0)? "약속완료! 약속번호는 \""+rnumber+"\"입니다.":"약속실패";
-		//String loc=(n>0)? "yaksokReservePage":"javascript:history.back()";
-		//return CommonUtil.addMsgLoc(m, msg, loc);
-		return "redirect:yaksokReservePage";
+		String msg=(n>0)? "약속완료! 약속번호는 \""+rnumber+"\"입니다.":"약속실패";
+		String loc=(n>0)? "yaksokReservePage":"javascript:history.back()";
+		return CommonUtil.addMsgLoc(m, msg, loc);
+		//return "redirect:yaksokReservePage";
 		
 	}
 	

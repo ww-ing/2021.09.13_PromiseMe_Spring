@@ -338,8 +338,6 @@ public class YaksokController {
 		m.addAttribute("yearList", yearList);
 		
 		//2. 월 데이터의 선택된 year값 받아오기
-		//String month_selectYear=req.getParameter("month_selectYear");
-		//System.out.println("month_selectYear1="+month_selectYear);
 	
 		if(month_selectYear==null||month_selectYear.trim().isEmpty()) {
 			month_selectYear=yearList.get(0);
@@ -354,8 +352,6 @@ public class YaksokController {
 		m.addAttribute("monthList", monthList);
 		
 		//4. 월 데이터의 선택된 month값 받아오기
-		//String month_selectMonth=req.getParameter("month_selectMonth");
-		//System.out.println("month_selectMonth1="+month_selectMonth);
 		
 		if(month_selectMonth==null||month_selectMonth.trim().isEmpty()) {
 			month_selectMonth=monthList.get(0);
@@ -366,8 +362,6 @@ public class YaksokController {
 		
 		//----------해당 연도의 예약 통계 화면
 		//1. 선택한 연도 받아오기
-		//String year_selectYear=req.getParameter("year_selectYear");
-		//System.out.println("year_selectYear1="+year_selectYear);
 		
 		if(year_selectYear==null||year_selectYear.trim().isEmpty()) {
 			year_selectYear=yearList.get(0);
@@ -394,10 +388,10 @@ public class YaksokController {
 		String month_last_day=Integer.toString(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 		
 		//해당 월의 데이터 가져오기
-//		List<String> monthData = 
-//				dao.selectYaksokReserveMonthData(yidx,year_month_data,month_last_day);
+		//List<String> monthData = 
+		//		yaksokService.selectYaksokReserveMonthData(yidx,year_month_data,month_last_day);
 		
-//		System.out.println("해당 월의 데이터="+monthData);
+		//System.out.println("해당 월의 데이터="+monthData);
 		
 		//----------해당 연도의 예약 통계 데이터
 		//List<String> yearData = dao.selectYaksokReserveYearData(yidx,year_selectYear);

@@ -194,6 +194,17 @@ public class YaksokServiceImpl implements YaksokService {
 		return yaksokStatisticsMapper.selectYaksokReserveUserCount(yidx);
 	}
 	
+	@Override
+	public List<String> selectYaksokReserveMonthData(String yidx, String year_month_data, String month_last_day) {
+		
+		Map<String, String> map=new HashMap<>();
+		map.put("yidx", yidx);
+		map.put("year_month_data", year_month_data);
+		map.put("month_last_day", month_last_day);
+		
+		return yaksokStatisticsMapper.selectYaksokReserveMonthData(map);
+	}
+	
 	
 	
 	
