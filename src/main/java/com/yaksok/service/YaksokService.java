@@ -1,6 +1,7 @@
 package com.yaksok.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yaksok.domain.YaksokCalendarVO;
 import com.yaksok.domain.YaksokInfoVO;
@@ -94,9 +95,13 @@ public interface YaksokService {
 	int selectYaksokReserveUserCount(String yidx);
 	
 	/**약속 얘약 정보의 month 데이터*/
-	List<String> selectYaksokReserveMonthData(String yidx, String year_month_data, String month_last_day);
+	Map<String,Object> selectYaksokReserveMonthData(String yidx, String year_month_data, String month_last_day);
 	
+	/**약속 예약 정보의 year 데이터*/
+	Map<String,Object> selectYaksokReserveYearData(String yidx, String year_selectYear);
 	
+	/**프로시저 테스트*/
+	Map<String,Object> testProc(String yidx);
 	
 		
 		

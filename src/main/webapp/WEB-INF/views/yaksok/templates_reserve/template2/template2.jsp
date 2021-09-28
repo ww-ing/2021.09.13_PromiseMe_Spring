@@ -22,7 +22,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
 		<link href="${myctx}/resources/static/templates/template2/css/font-awesome.min.css" rel="stylesheet" type="text/css">		
-		<link href="${myctx}/resources/static/templates/template2/css/templatemo_style.css" rel="stylesheet" type="text/css"> 
+		<link href="${myctx}/resources/static/templates/template2/css/templatemo_style.css" rel="stylesheet" type="text/css">
 		</head>
 		
 		<body>
@@ -37,6 +37,7 @@
 				<h1 class="templatemo-header">${info.content_main_title}</h1>
 				<img src="${myctx}/resources/static/templates/template2/images/wooden-desk.jpg" alt="Wooden Desk" class="img-thumbnail">
 				<a class="btn btn-secondary " href="#yaksokReserveModal" data-toggle="modal">예약하기</a>
+				<!-- <a class="btn btn-secondary " onclick="asd()" data-toggle="modal">예약하기</a> -->
 				<article>
 					<h2>${info.content1_title}</h2>
 					<p>${info.content1}</p>

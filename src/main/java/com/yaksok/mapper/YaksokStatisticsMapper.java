@@ -18,6 +18,12 @@ public interface YaksokStatisticsMapper {
 	int selectYaksokReserveUserCount(String yidx);
 	
 	/**약속 얘약 정보의 month 데이터*/
-	List<String> selectYaksokReserveMonthData(Map<String, String> map);
+	Map<String,Object> selectYaksokReserveMonthData(Map<String, Object> map);
+	
+	/**약속 예약 정보의 year 데이터*/
+	Map<String,Object> selectYaksokReserveYearData(Map<String, Object> map);
+	
+	/**프로시저 테스트*/
+	Map<String,Object> testProc(Map<String,Object> map);
 
 }

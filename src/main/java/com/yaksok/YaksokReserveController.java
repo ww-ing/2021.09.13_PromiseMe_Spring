@@ -1,5 +1,7 @@
 package com.yaksok;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,16 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.common.CommonUtil;
 import com.common.RandomNumber;
+import com.yaksok.domain.YaksokCalendarVO;
 import com.yaksok.domain.YaksokInfoVO;
 import com.yaksok.domain.YaksokOnOffVO;
 import com.yaksok.domain.YaksokReserveVO;
 import com.yaksok.service.YaksokReserveService;
+import com.yaksok.service.YaksokService;
 
 @Controller
 public class YaksokReserveController {
 	
 	@Inject
 	private YaksokReserveService yaksokReserveService;
+	
+	@Inject
+	private YaksokService yaksokService;
 	
 	@GetMapping("yaksokReservePage")
 	public String yaksokReservePage(Model m,
@@ -59,10 +66,50 @@ public class YaksokReserveController {
 		
 		m.addAttribute("url", url);
 		String msg=(n>0)? "약속완료! 약속번호는 \""+rnumber+"\"입니다.":"약속실패";
-		String loc=(n>0)? "yaksokReservePage":"javascript:history.back()";
+		String loc=(n>0)? "yaksokReservePage?url="+url:"javascript:history.back()";
 		return CommonUtil.addMsgLoc(m, msg, loc);
-		//return "redirect:yaksokReservePage";
 		
+	}
+	
+	@GetMapping("yaksokReserveCalendarModal")
+	public String yaksokReserveCalendarModal(Model m,
+			@RequestParam("url") String url) {
+		
+		YaksokInfoVO info=yaksokReserveService.selectYaksokInfoByURL(url);
+		
+		List<YaksokCalendarVO> calendarList=yaksokService.selectAllYaksokCalendar(info.getYidx());
+		m.addAttribute("calendarList", calendarList);
+		
+		m.addAttribute("url", url);
+		
+		return "/yaksok/yaksokCalendar";
+	}
+	
+//	@GetMapping("yaksokReserveModal")
+//	public String yaksokReserveModal(Model m) {
+//	
+//		
+//		return "/yaksok/modal/yaksokReserveModal";
+//	}
+	
+	@GetMapping("yaksokCalendarEditModal")
+	public String yaksokCalendarEditModal(Model m,
+			HttpServletRequest req,
+			@RequestParam("yidx") String yidx,
+			@RequestParam("cidx") String cidx) {
+		
+		YaksokCalendarVO vo=yaksokService.selectYaksokCalendarSchedule(cidx);
+		
+		String ctitle=vo.getCtitle();
+		String ccontent=vo.getCcontent();
+		
+		m.addAttribute("yidx", yidx);
+		m.addAttribute("cidx", cidx);
+		m.addAttribute("ctitle", ctitle);
+		m.addAttribute("ccontent", ccontent);
+		m.addAttribute("url", "url");
+		
+		return "/yaksok/modal/yaksokCalendarEditModal";
 	}
 	
 }

@@ -62,7 +62,7 @@
 		<table class="table">
 		
 			<tr>
-				<td width="20%">
+				<td width="10%">
 				<b>이름</b>
 				</td>
 				<td width="80%">
@@ -72,7 +72,7 @@
 			</tr>
 			
 			<tr>
-				<td width="20%">
+				<td width="10%">
 				<b>아이디</b>
 				</td>
 				<td width="80%">
@@ -86,27 +86,27 @@
 			</tr>
 			
 			<tr>
-				<td width="20%">
+				<td width="10%">
 				<b>비밀번호</b>
 				</td>
-				<td width="80%">
-				<input type="text" name="pwd" placeholder="Password"
+				<td width="50%">
+				<input type="password" name="pwd" placeholder="Password"
 				class="form-control">
 				</td>
 			</tr>
 			
 			<tr>
-				<td width="20%">
+				<td width="10%">
 				<b>비밀번호 확인</b>
 				</td>
-				<td width="80%">
-				<input type="text" name="pwd2" placeholder="Re Password"
+				<td width="50%">
+				<input type="password" name="pwd2" placeholder="Re Password"
 				class="form-control">
 				</td>
 			</tr>
 			
 			<tr>
-				<td width="20%">
+				<td width="10%">
 				<b>연락처</b>
 				</td>
 				<td width="80%">
@@ -129,10 +129,10 @@
 			</tr>
 			
 			<tr>
-				<td width="20%">
+				<td width="10%">
 				<b>회원상태</b>
 				</td>
-				<td width="80%">
+				<td width="10%">
 				
 				
 				<input type="radio" name="mstate" value="0" placeholder="Name" ${mstate1}>일반회원

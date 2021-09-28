@@ -40,4 +40,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where yidx=#{yidx})
 	</select>
 	
+	<!-- 연도와 월의 데이터를 활용하여 해달 월의 예약 데아터 가져오기 -->
+	<resultMap id="monthData" type="hashmap"></resultMap>
+	
+	<select id="selectYaksokReserveMonthData" statementType="CALLABLE" 
+	parameterType="hashmap">
+	{ CALL month_data_proc(
+	#{monthData, mode=OUT, jdbcType=VARCHAR, javaType=String}, 
+	#{yidx, mode=IN, jdbcType=VARCHAR}, 
+	#{year_month_data, mode=IN, jdbcType=VARCHAR}, 
+	#{month_last_day, mode=IN, jdbcType=VARCHAR})
+	}
+	</select>
+	
+	<!-- 연도의 데이터를 활용하여 해당 연도의 예약 데이터 가져오기 -->
+	<resultMap id="yearData" type="hashmap"></resultMap>
+	
+	<select id="selectYaksokReserveYearData" statementType="CALLABLE"
+	parameterType="hashmap">
+	{ CALL year_data_proc(
+	#{yearData, mode=OUT,jdbcType=VARCHAR, javaType=String},
+	#{yidx, mode=IN, jdbcType=VARCHAR},
+	#{year_selectYear, mode=IN, jdbcType=VARCHAR})
+	}
+	</select>
+	
+	<!-- 프로시저 테스트 -->
+	<resultMap id="month_data" type="hashmap"></resultMap>
+	
+	<select id="testProc" statementType="CALLABLE" parameterType="hashmap"
+	resultType="hashmap">
+	
+	{ CALL month_data_proc_test3(
+	#{month_data,mode=OUT,jdbcType=VARCHAR, javaType=String},
+	#{yidx, mode=IN,jdbcType=VARCHAR})}
+	</select>
+	
 </mapper>

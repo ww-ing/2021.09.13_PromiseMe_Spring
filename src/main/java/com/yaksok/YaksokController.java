@@ -3,6 +3,7 @@ package com.yaksok;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -326,7 +327,7 @@ public class YaksokController {
 			@RequestParam(defaultValue="") String month_selectYear,
 			@RequestParam(defaultValue="") String month_selectMonth,
 			@RequestParam(defaultValue="") String year_selectYear
-			) {
+			) {	
 		
 		//String yidx=req.getParameter("yidx");
 		m.addAttribute("yidx", yidx);
@@ -370,6 +371,11 @@ public class YaksokController {
 		}
 		
 		m.addAttribute("year_selectYear", year_selectYear);
+		
+		//선택한 연도의 전년도 데이터 구해서 넣어주기
+		int year_selectYear_before_int = Integer.parseInt(year_selectYear)-1;
+		String year_selectYear_before = Integer.toString(year_selectYear_before_int); 
+		m.addAttribute("year_selectYear_before", year_selectYear_before);
 
 		//----------해당 월의의 예약 통계 데이터
 		
@@ -387,14 +393,37 @@ public class YaksokController {
         cal.set(Integer.parseInt(month_selectYear), Integer.parseInt(month_selectMonth)-1, 1);
 		String month_last_day=Integer.toString(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 		
-		//해당 월의 데이터 가져오기
-		//List<String> monthData = 
-		//		yaksokService.selectYaksokReserveMonthData(yidx,year_month_data,month_last_day);
+		//test
+//		Map<String,Object> asd = 
+//				yaksokService.testProc(yidx);
+//		String month_data=(String) asd.get("month_data");
+//		System.out.println("controller의 month_data="+month_data);
 		
-		//System.out.println("해당 월의 데이터="+monthData);
+		//해당 월의 데이터 가져오기
+		Map<String,Object> monthMap =
+				yaksokService.selectYaksokReserveMonthData(yidx, year_month_data, month_last_day);
+		String monthData=(String) monthMap.get("monthData");
+		System.out.println("monthData="+monthData);
+		
+		m.addAttribute("monthData", monthData);
 		
 		//----------해당 연도의 예약 통계 데이터
-		//List<String> yearData = dao.selectYaksokReserveYearData(yidx,year_selectYear);
+		Map<String,Object> yearMap =
+				yaksokService.selectYaksokReserveYearData(yidx,year_selectYear);
+		
+		String yearData=(String) yearMap.get("yearData");
+		System.out.println("yearData="+yearData);
+		
+		m.addAttribute("yearData", yearData);
+		
+		//----------해당 연도의 전년도 예약 통계 데이터
+		Map<String,Object> yearMap_before =
+				yaksokService.selectYaksokReserveYearData(yidx, year_selectYear_before);
+		
+		String yearData_before=(String) yearMap_before.get("yearData");
+		System.out.println("yearData_before="+yearData_before);
+		m.addAttribute("yearData_before", yearData_before);
+		
 		
 		
 		//----------중복 예약 통계 데이터

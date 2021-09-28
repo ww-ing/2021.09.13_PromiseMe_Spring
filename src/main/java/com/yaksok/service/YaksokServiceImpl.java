@@ -194,15 +194,46 @@ public class YaksokServiceImpl implements YaksokService {
 		return yaksokStatisticsMapper.selectYaksokReserveUserCount(yidx);
 	}
 	
+	/**약속 통계 페이지에서 year, month 데이터를 활용하여 해당 월의 데이터 보여주기*/
 	@Override
-	public List<String> selectYaksokReserveMonthData(String yidx, String year_month_data, String month_last_day) {
+	public Map<String,Object> selectYaksokReserveMonthData(String yidx, String year_month_data, String month_last_day) {
 		
-		Map<String, String> map=new HashMap<>();
+		Map<String, Object> map=new HashMap<>();
 		map.put("yidx", yidx);
 		map.put("year_month_data", year_month_data);
 		map.put("month_last_day", month_last_day);
 		
-		return yaksokStatisticsMapper.selectYaksokReserveMonthData(map);
+		
+		yaksokStatisticsMapper.selectYaksokReserveMonthData(map);
+		
+		return map;
+
+	}
+	
+	/**약속 통계 페이지에서 선택한 year 값을 활용하여 해당 연도의 데이터 보여주기*/
+	@Override
+	public Map<String,Object> selectYaksokReserveYearData(String yidx, String year_selectYear){
+		
+		Map<String,Object> map=new HashMap<>();
+		map.put("yidx", yidx);
+		map.put("year_selectYear", year_selectYear);
+		
+		yaksokStatisticsMapper.selectYaksokReserveYearData(map);
+		
+		return map;
+	}
+	
+	/**프로시저 테스트*/
+	@Override
+	public Map<String,Object> testProc(String yidx) {
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("yidx", yidx);
+		
+		
+		yaksokStatisticsMapper.testProc(map);
+		System.out.println("month_data="+map.get("month_data"));
+		return map;
 	}
 	
 	

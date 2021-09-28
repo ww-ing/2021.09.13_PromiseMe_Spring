@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertYaksokReserve" parameterType="YaksokReserve" >
 		insert into yaksok_reserve 
 		values(yaksok_reserve_ridx_seq.nextval, #{rusername}, #{rhp}, #{rcontent}, #{rnumber}, 
-		sysdate, #{rcheckedstate}, #{yidx})
+		sysdate, #{rcheckedstate}, #{cidx}, #{yidx})
 	</insert>
 	
 </mapper>

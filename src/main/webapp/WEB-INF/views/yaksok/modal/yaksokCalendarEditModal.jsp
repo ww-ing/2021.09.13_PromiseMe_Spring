@@ -10,7 +10,8 @@
                         <h4 class="text-primary" style="margin:auto">일정수정</h4>
                     </div>
 					
-                    <!-- Modal Body -->
+                    <!-- 약속 관리 페이지에서 넘어온 경우 -->
+                    <c:if test="${url eq null}">
                     <div class="modal-body">
                         <form name="yaksokCalendarAddModalForm" action="#" method="post">
                         	<input type="hidden" name="cidx" value="${cidx}">
@@ -34,5 +35,33 @@
                             </div>
                         </form>
                     </div>
+                    </c:if>
+                    
+					<!-- 예약 페이지에서 넘어온 경우 -->                    
+                    <c:if test="${url ne null }">
+                    <div class="modal-body">
+                        <form name="yaksokCalendarAddModalForm" action="#" method="post">
+                        	<input type="hidden" name="cidx" value="${cidx}">
+                        	<input type="hidden" name="yidx" value="${yidx}">
+                            <div class="form-group">
+                                <label for="ctitle">제목</label>
+                                <input type="text" autofocus="autofocus" 
+                                class="form-control" name="ctitle" value="${ctitle}" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                            	<label for="ccontent">설명</label>
+                            	<p><textarea name="ccontent" cols="53" rows="5" readonly>${ccontent}</textarea></p>
+                            </div>
+                            <div class="form-group" align="center">
+                            	<a class="btn btn-primary btn-block" onclick="yaksokCalendarSelect(${cidx})">선택</a>
+                            	
+                            	<a class="btn btn-danger btn-block" href="#" onclick="yaksokCalendarEditModalHide()">닫기</a>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    </c:if>
+                    
                 </div>
             </div>

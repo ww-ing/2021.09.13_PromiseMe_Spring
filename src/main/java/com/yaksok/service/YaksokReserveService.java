@@ -1,5 +1,7 @@
 package com.yaksok.service;
 
+import java.util.Map;
+
 import com.yaksok.domain.YaksokInfoVO;
 import com.yaksok.domain.YaksokOnOffVO;
 import com.yaksok.domain.YaksokReserveVO;

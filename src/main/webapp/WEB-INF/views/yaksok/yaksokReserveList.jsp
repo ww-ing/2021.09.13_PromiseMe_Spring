@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
+	#listTr:hover{
+		background:#E2E2E2;
+	}
+</style>
 
 	
     			<!-- Begin Page Content -->
@@ -37,7 +42,7 @@
                                         
                                         <c:if test="${reserveList ne null and not empty reserveList}">
                                         <c:forEach var="list" items="${reserveList}">
-                                        <tr onclick="yaksokReserveListUserInfoModal(${list.yidx},${list.ridx})">
+                                        <tr id="listTr" onclick="yaksokReserveListUserInfoModal(${list.yidx},${list.ridx})">
                                         	
                                             <td>${list.rusername}</td>
                                             <td>${list.rhp}</td>

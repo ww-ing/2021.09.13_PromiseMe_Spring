@@ -141,8 +141,14 @@
     	<div class="text-center">
     	
     		<!-- <a class='btn btn-primary' href='#yaksokCalendarAddModal' data-toggle='modal'>등록</a> -->
-    		
+    		<c:if test="${url eq null }">
     		<a class='btn btn-primary' href='#' onclick="yaksokCalendarAddModalShow()" data-toggle='modal'>등록</a>
+    		</c:if>
+    		
+    		<c:if test="${url ne null }">
+    		<!-- <button class="btn btn-primary" data-dismiss="modal">닫기</button> -->
+    		<a class='btn btn-primary' href='#' onclick="closeReserveCalendar()" data-toggle='modal'>닫기</a>
+    		</c:if>
     		
     	</div>
     	
@@ -152,11 +158,3 @@
     <%@ include file="/WEB-INF/views/yaksok/modal/yaksokCalendarAddModal.jsp"%>
 </body>
 </html>
-
-
-
-
-
-
-
-

@@ -14,7 +14,6 @@
 	 
 	<table class="table table-striped">
 		<tr>
-		   <th>번호</th>
 		   <th>약속명</th>
 		   <th>등록일</th>
 		   <th>미확인</th>
@@ -23,7 +22,6 @@
 		
 		<c:forEach var="yaksok" items="${yaksokList}">
 		<tr>
-		   <th>${yaksok.yidx}</th>
 		   <th>${yaksok.yaksokname}</th>
 		   <th>${yaksok.indate}</th>
 		   <th class="text text-danger">0</th>

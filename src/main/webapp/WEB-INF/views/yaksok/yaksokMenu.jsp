@@ -233,6 +233,24 @@
     				})
     			}
     			
+    			//-------------------------------------------------약속 통계
+    			function showStatistics(){
+    				
+    				$.ajax({
+    					type:'get',
+    					url:'yaksokStatistics?yidx='+${info.yidx},
+    					cache:false,
+    					dataType:'html'
+
+    				}).done(function(res){
+    					$('#yaksokMenu').html(res);
+    				})
+    				.fail(function(err){
+    					alert('등록된 예약이 없습니다.');
+    				})
+    				
+    			}
+    			
     		</script>
     </head>
     <body>
@@ -244,7 +262,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showMenu('yaksokSetForm')">테마</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showMenu('yaksokCalendar')">일정관리</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showCpage('1')">예약관리</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showMenu('yaksokStatistics')">통계</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showStatistics()">통계</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick="showMenu('yaksokSetting')">설정</a>
                     
                 </div>
