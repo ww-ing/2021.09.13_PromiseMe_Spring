@@ -223,21 +223,6 @@ public class YaksokServiceImpl implements YaksokService {
 		return map;
 	}
 	
-	/**프로시저 테스트*/
-	@Override
-	public Map<String,Object> testProc(String yidx) {
-		
-		Map<String, Object> map=new HashMap<>();
-		map.put("yidx", yidx);
-		
-		
-		yaksokStatisticsMapper.testProc(map);
-		System.out.println("month_data="+map.get("month_data"));
-		return map;
-	}
-	
-	
-	
 	
 	
 	//--------------------YaksokSettingMapper 관련

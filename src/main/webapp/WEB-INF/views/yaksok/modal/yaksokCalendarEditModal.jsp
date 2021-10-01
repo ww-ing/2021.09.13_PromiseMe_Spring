@@ -6,12 +6,14 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Modal Header -->
+                    
+                    <!-- 약속 관리 페이지에서 넘어온 경우 -->
+                    <c:if test="${url eq null}">
+                    
                     <div class="modal-header">
                         <h4 class="text-primary" style="margin:auto">일정수정</h4>
                     </div>
-					
-                    <!-- 약속 관리 페이지에서 넘어온 경우 -->
-                    <c:if test="${url eq null}">
+                    
                     <div class="modal-body">
                         <form name="yaksokCalendarAddModalForm" action="#" method="post">
                         	<input type="hidden" name="cidx" value="${cidx}">
@@ -39,6 +41,11 @@
                     
 					<!-- 예약 페이지에서 넘어온 경우 -->                    
                     <c:if test="${url ne null }">
+                    
+                    <div class="modal-header">
+                        <h4 class="text-primary" style="margin:auto">일정선택</h4>
+                    </div>
+                    
                     <div class="modal-body">
                         <form name="yaksokCalendarAddModalForm" action="#" method="post">
                         	<input type="hidden" name="cidx" value="${cidx}">

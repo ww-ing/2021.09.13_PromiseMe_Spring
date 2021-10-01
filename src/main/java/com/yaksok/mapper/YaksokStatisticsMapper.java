@@ -22,8 +22,5 @@ public interface YaksokStatisticsMapper {
 	
 	/**약속 예약 정보의 year 데이터*/
 	Map<String,Object> selectYaksokReserveYearData(Map<String, Object> map);
-	
-	/**프로시저 테스트*/
-	Map<String,Object> testProc(Map<String,Object> map);
 
 }

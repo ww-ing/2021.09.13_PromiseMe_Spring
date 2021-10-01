@@ -100,8 +100,6 @@ public interface YaksokService {
 	/**약속 예약 정보의 year 데이터*/
 	Map<String,Object> selectYaksokReserveYearData(String yidx, String year_selectYear);
 	
-	/**프로시저 테스트*/
-	Map<String,Object> testProc(String yidx);
 	
 		
 		

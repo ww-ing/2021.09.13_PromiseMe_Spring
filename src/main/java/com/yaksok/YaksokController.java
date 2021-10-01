@@ -382,9 +382,8 @@ public class YaksokController {
 		//10월이 아니라면 0을 빼기
 		if(!month_selectMonth.equals("10")) {
 			month_selectMonth=month_selectMonth.replace("0", "");
-			
-			//System.out.println("0을 제거한 month_selectMonth="+month_selectMonth);
 		}
+		
 		//선택한 연 월 을 합친 문자열
 		String year_month_data=month_selectYear+"/"+month_selectMonth+"/";
 		
@@ -392,12 +391,6 @@ public class YaksokController {
         Calendar cal = Calendar.getInstance();
         cal.set(Integer.parseInt(month_selectYear), Integer.parseInt(month_selectMonth)-1, 1);
 		String month_last_day=Integer.toString(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-		
-		//test
-//		Map<String,Object> asd = 
-//				yaksokService.testProc(yidx);
-//		String month_data=(String) asd.get("month_data");
-//		System.out.println("controller의 month_data="+month_data);
 		
 		//해당 월의 데이터 가져오기
 		Map<String,Object> monthMap =
