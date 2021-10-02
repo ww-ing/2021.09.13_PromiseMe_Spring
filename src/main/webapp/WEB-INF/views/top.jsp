@@ -50,8 +50,9 @@
 					</c:if>  
 					
 					<c:if test="${loginUser.userid eq 'admin'}">
-						<li class="nav-item"><a class="nav-link" href="#">회원관리</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">약속관리</a></li>
+						<li class="nav-item"><a class="nav-link" href="${myctx}/admin/listAdmin">회원관리</a></li>
+						<li class="nav-item"><a class="nav-link" href="${myctx}/admin/yaksokAdmin">약속관리</a></li>
+						<li class="nav-item"><a class="nav-link" href="${myctx}/admin/CustomerServiceAdmin">고객센터</a></li>
 						<li class="nav-item"><a class="nav-link" href="${myctx}/logout">로그아웃</a></li>
 					</c:if>
                     </ul>

@@ -18,15 +18,23 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<!-- 매퍼 정의================================ -->
 	<mappers>
+		<!-- 유저 페이지 -->
 		<mapper resource="config/mybatis/mapper/UserMapper.xml"/>
+		
+		<!-- 약속 생성 페이지 -->
 		<mapper resource="config/mybatis/mapper/YaksokMapper.xml"/>
 		
+		<!-- 약속 메뉴 페이지 -->
 		<mapper resource="config/mybatis/mapper/YaksokThemeMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokCalendarMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokReserveListMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokStatisticsMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/YaksokSettingMapper.xml"/>
 		
+		<!-- 예약하기 페이지 -->
 		<mapper resource="config/mybatis/mapper/YaksokReserveMapper.xml"/>
+		
+		<!-- 관리자 페이지 -->
+		<mapper resource="config/mybatis/mapper/AdminMapper.xml"/>
 	</mappers>
 </configuration>

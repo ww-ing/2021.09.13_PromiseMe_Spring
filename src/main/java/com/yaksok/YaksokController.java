@@ -400,7 +400,7 @@ public class YaksokController {
 		
 		m.addAttribute("monthData", monthData);
 		
-		//----------해당 연도의 예약 통계 데이터
+		//----------해당 연도의 데이터 가져오기
 		Map<String,Object> yearMap =
 				yaksokService.selectYaksokReserveYearData(yidx,year_selectYear);
 		
