@@ -260,11 +260,6 @@ public class YaksokController {
 			cpage=1;
 		}
 		
-		//페이지 사이즈를 유동적으로 받기 위함
-		//if(pageSizeStr==null||pageSizeStr.trim().isEmpty()) {
-			//pageSizeStr="5";
-		//}
-		
 		//약속 예약 정보 개수 가져오기
 		int count=yaksokService.getYaksokReserveCount(yidx);
 		m.addAttribute("reserveCount", count);

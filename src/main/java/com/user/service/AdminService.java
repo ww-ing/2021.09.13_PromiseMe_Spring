@@ -24,5 +24,31 @@ public interface AdminService {
 	
 	/** 회원의 mstate값을 수정 */
 	Integer editUserMstateAdmin(String idx, String mstate);
+	
+	//--------------------약속 통계 관련
+	
+	/**약속 예약 정보의 year데이터*/
+	List<String> getAllYaksokReserveYearList();
+	
+	/**약속 예약 정보의 month데이터*/
+	List<String> getAllYaksokReserveMonthList(String year);
+	
+	/**약속 얘약 정보의 month 데이터*/
+	Map<String,Object> selectYaksokReserveMonthData(String year_month_data, String month_last_day);
+	
+	/**약속 예약 정보의 year 데이터*/
+	Map<String,Object> selectYaksokReserveYearData(String year_selectYear);
+	
+	/** 총 등록 약속 가져오기 */
+	int selectTotalYaksokCount();
+	
+	/** 최근 7일 등록 약속 가져오기 */
+	int selectWeekYaksokCount();
+	
+	/** 최근 30일 등록 약속 가져오기 */
+	int selectMonthYaksokCount();
+	
+	/** 최근 1년 약속 가져오기 */
+	int selectYearYaksokCount();
 
 }

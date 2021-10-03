@@ -12,7 +12,7 @@
         bindto: '#chartMonth',
         data: {
             columns: [
-              ['${month_selectMonth}월', 0 ${monthData}]
+              [${month_selectMonth}+'월', 0 ${monthData}]
             ]
           }
       });
@@ -50,11 +50,7 @@
     		dataType:'html'
     		
     	}).done(function(res){
-    		/* $('#yaksokMenu').html(res).find('#monthList') */
-    		/* $('#yaksokMenu').load(location.href+'#monthList') */
-    		/* location.reload(true); */
     		$('#yaksokMenu').html(res) 
-    		alert('month_year 완료')
     		
     	})
     	.fail(function(err){
@@ -73,7 +69,6 @@
     		
     	}).done(function(res){
     		$('#yaksokMenu').html(res) 
-    		alert('month_month 완료')
     		
     	})
     	.fail(function(err){
@@ -91,22 +86,13 @@
     		dataType:'html'
     		
     	}).done(function(res){
-    		/* $('#yaksokMenu').html(res).find('#monthList') */
-    		/* $('#yaksokMenu').load(location.href+'#monthList') */
-    		/* location.reload(true); */
     		$('#yaksokMenu').html(res) 
-    		alert('year_month 완료')
     		
     	})
     	.fail(function(err){
     		alert('error: '+err.status);
     	})
     })
-    
-    
-    
-    
-    
     </script>
 				<!-- Begin Page Content -->
                 <div class="container-fluid">
