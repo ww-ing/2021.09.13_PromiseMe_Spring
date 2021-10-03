@@ -1,6 +1,7 @@
 package com.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.user.domain.UserVO;
 
@@ -20,5 +21,8 @@ public interface AdminService {
 	
 	/** 페이징된 회원 리스트 가져오기 */
 	List<UserVO> selectAllUserAdmin_paging(int start, int end);
+	
+	/** 회원의 mstate값을 수정 */
+	Integer editUserMstateAdmin(String idx, String mstate);
 
 }

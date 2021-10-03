@@ -21,5 +21,8 @@ public interface AdminMapper {
 	
 	/** 페이징된 회원 리스트 가져오기 */
 	List<UserVO> selectAllUserAdmin_paging(Map<String, String> map);
+	
+	/** 회원의 mstate값을 수정 */
+	Integer editUserMstateAdmin(Map<String, String> map);
 
 }

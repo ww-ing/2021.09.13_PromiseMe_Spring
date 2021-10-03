@@ -60,9 +60,9 @@
                                     <thead>
                                         <tr>
                                             <th>이름</th>
+                                            <th>아이디</th>
                                             <th>전화번호</th>
                                             <th>등록일</th>
-                                            <th>등록 약속 수</th>
                                             <th>회원상태</th>
                                         </tr>
                                      </thead>
@@ -81,10 +81,9 @@
                                         <tr id="listTr" onclick="userInfoModal_admin(${list.idx})">
                                         	
                                             <td>${list.username}</td>
+                                            <td>${list.userid}</td>
                                             <td>${list.hp1}-${list.hp2}-****</td>
                                             <td>${list.indate}</td>
-                                            <td>3</td>
-                                            
                                             <c:if test="${list.mstate eq '0' }">
                                             <td class="text-primary">활동회원</td>
                                             </c:if>

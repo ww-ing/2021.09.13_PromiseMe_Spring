@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +25,9 @@ public class AdminController {
 	@GetMapping("/admin/listAdmin")
 	public String showListAdmin(Model m,
 			@RequestParam(value="cpage", defaultValue="1") String cpage,
+			@RequestParam(value="mstate", defaultValue="0") String mstate,
+			@RequestParam(value="idx", defaultValue="21") String idx,
 			HttpSession session) {
-		
-		System.out.println("cpage1="+cpage);
 		
 		session.removeAttribute("cpage");
 		session.setAttribute("cpage", cpage);
@@ -45,7 +46,7 @@ public class AdminController {
 		}
 		
 		//한 페이지 당 보여줄 게시글 수
-		int pageSize=5;
+		int pageSize=6;
 		
 		int pageCount=(userCount-1)/pageSize+1;
 		m.addAttribute("pageCount", pageCount);
@@ -60,6 +61,12 @@ public class AdminController {
 		//약속 예약 정보 리스트
 		List<UserVO> userList=adminService.selectAllUserAdmin_paging(start, end);		
 		m.addAttribute("userList", userList);
+		
+		UserVO editUser=adminService.selectUserByIdx(idx);
+		
+		if(!editUser.getMstate().equals(mstate)) {
+			adminService.editUserMstateAdmin(idx, mstate);
+		}
 		
 		return"admin/list_admin";
 	}
@@ -82,13 +89,19 @@ public class AdminController {
 		m.addAttribute("yaksokCount", yaksokCount);
 		
 		String cpage=(String) session.getAttribute("cpage");
-		System.out.println("모달의 cpage="+cpage);
 		m.addAttribute("cpage", cpage);
 		
 		return "admin/modal/userInfoModal_admin";
 	}
 	
-	
+	/* 회원정보 수정 */
+	@PostMapping("/admin/mstateEdit_admin")
+	public String mstateEdit_admin(Model m, 
+			@RequestParam("mstate") String mstate) {
+		
+		System.out.println("mstate="+mstate);
+		return "admin/modal/userInfoModal_admin";
+	}
 	
 	
 	

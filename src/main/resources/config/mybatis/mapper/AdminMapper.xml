@@ -31,4 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectYaksokCountOfUser" parameterType="string" resultType="int">
 		select count(*) from yaksok where idx=#{idx}
 	</select>
+	
+	<!-- idx와 mstate로 해당 회원의 회원상태 변경하기 -->
+	<select id="editUserMstateAdmin" parameterType="hashmap">
+		update member set mstate=#{mstate} where idx=#{idx}
+	</select>
 </mapper>

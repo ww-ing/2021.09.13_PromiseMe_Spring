@@ -44,4 +44,13 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.selectAllUserAdmin_paging(map);
 	}
 
+	@Override
+	public Integer editUserMstateAdmin(String idx, String mstate) {
+		Map<String, String> map=new HashMap<>();
+		map.put("idx", idx);
+		map.put("mstate", mstate);
+		
+		return adminMapper.editUserMstateAdmin(map);
+	}
+
 }
